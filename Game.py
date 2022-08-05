@@ -7,6 +7,7 @@ from EffectManager import *
 from Unit import *
 from Worker import *
 import ImageLoader
+import schedule
 
 
 class Game:
@@ -16,8 +17,12 @@ class Game:
         self.tk.title("Game")
         self.tk.resizable(0, 0)
         self.tk.wm_attributes("-topmost", 1)
+        self.start = time.time()
+        self.monster_count = 0
+        self.total_monster = 0
+        self.play_count = 0
 
-        self.canvas = Canvas(self.tk, width=1000, height=500)
+        self.canvas = Canvas(self.tk, width=1500, height=800)
         self.canvas.pack()
 
         # 기준 이미지
@@ -33,14 +38,18 @@ class Game:
         self.cursor_manager = CursorManager(self)
         self.effect_manager = EffectManager(self)
 
-        snail_blueprint = self.unit_blueprint_manager.get_unit_blueprint('Snail')
-        character_blueprint = self.unit_blueprint_manager.get_unit_blueprint('Character')
+        self.createCharacter('Character')
 
-        for i in range(2):
-            snail = Unit(120, 40 + 40 * i, snail_blueprint, self)
-            character = Unit(250, 40 + 40 * i, character_blueprint, self)
-            self.unit_manager.add_game_object(snail)
-            self.unit_manager.add_game_object(character)
+    def createMonster(self, name):
+        monster_blueprint = self.unit_blueprint_manager.get_unit_blueprint(name)
+        monster = Unit(180, 80, monster_blueprint, self)
+        self.unit_manager.add_game_object(monster)
+        return monster
+
+    def createCharacter(self, name):
+        character_blueprint = self.unit_blueprint_manager.get_unit_blueprint(name)
+        character = Unit(500, 300, character_blueprint, self)
+        self.unit_manager.add_game_object(character)
 
     def mainLoop(self):
         frame_count = 0
@@ -57,6 +66,15 @@ class Game:
             self.tk.update()
             current_frame_time = time.time()
 
+            elapsed = old_time - self.start
+
+            if 5 < elapsed:
+                if self.monster_count < 5:
+                    if self.play_count % 100 == 0:
+                        monster = self.createMonster('Orange_Mushroom')
+                        monster.automove()
+                        self.monster_count += 1
+
             # 기대시간보다 적게 걸릴 경우
             # 기대시간만큼 걸리도록 남은 시간을 대기
             if current_frame_time - old_frame_time < time_delta:
@@ -68,9 +86,10 @@ class Game:
             # frame count즉 FPS를 출력
             if current_frame_time - old_time > 1:
                 old_time = current_frame_time
-                print("FPS: ", frame_count)
+                # print("FPS: ", frame_count)
                 frame_count = 0
-            # time.sleep(0.01)
+            time.sleep(0.01)
+            self.play_count += 1
 
 
 g = Game()

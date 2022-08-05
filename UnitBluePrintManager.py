@@ -16,7 +16,7 @@ class UnitBluePrintManager:
         snail_blueprint = UnitBluePrint(
             self,
             name='Snail',
-            speed=0.5,
+            speed=50,
             max_health=35,
             max_shield=0,
             health_bar_number=5,
@@ -35,6 +35,29 @@ class UnitBluePrintManager:
             move_animation=MoveAnimation("Snail")
         )
 
+        # snail
+        orange_Mushroom_blueprint = UnitBluePrint(
+            self,
+            name='Orange_Mushroom',
+            speed=1,
+            max_health=50,
+            max_shield=0,
+            health_bar_number=5,
+
+            radius=10,
+            attack_range=0,
+            attack_power=10,
+            position_offset=(0, 0),
+
+            death_effect_offset=(0, 0),
+            death_effect_remain_time=5,
+            is_effect_lower=True,
+
+            idle_animation=StaticIdleAnimation("Orange_Mushroom"),
+            attack_animation=ForwardOnlyAttackAnimation("Orange_Mushroom"),
+            move_animation=MoveAnimation("Orange_Mushroom")
+        )
+
         # character
         character_blueprint = UnitBluePrint(
             self,
@@ -45,7 +68,7 @@ class UnitBluePrintManager:
             health_bar_number=5,
 
             radius=10,
-            attack_range=3,
+            attack_range=10,
             attack_power=10,
             position_offset=(0, 0),
 

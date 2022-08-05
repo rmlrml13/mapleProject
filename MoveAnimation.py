@@ -7,7 +7,7 @@ class MoveAnimation:
         move_animation_sprites = ImageLoader.sprite_dictionary[unit_name+"_move_animation_sprites"]
 
         # 필요 single_motion
-        self.move = ForwardMotion(move_animation_sprites, 5)
+        self.move = ForwardMotion(move_animation_sprites, 20)
 
     def update(self,unit):
         self.move.update(unit)

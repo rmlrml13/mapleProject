@@ -70,7 +70,7 @@ class ForwardOnlyAttackAnimation:
         attack_animation_sprites = ImageLoader.sprite_dictionary[unit_name+"_attack_animation_sprites"]
         
         # SIngle Motion 객체
-        attack_forward = ForwardMotion(attack_animation_sprites, 5)
+        attack_forward = ForwardMotion(attack_animation_sprites, 10)
         wait = Wait(15)
 
         # Animation 객체

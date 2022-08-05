@@ -10,18 +10,22 @@ def initialize():
 
     # 유닛 애니메이션 (idle, attack, move)
     sprite_dictionary["Snail_action"] = load_unit_action_sprite("Snail", 2, 5)
+    sprite_dictionary["Orange_Mushroom_action"] = load_unit_action_sprite("Orange_Mushroom", 2, 6)
     sprite_dictionary["Character_action"] = load_unit_action_sprite("Character", 2, 7)
 
     # idle animation
     sprite_dictionary["Snail_idle_sprites"] = sprite_dictionary["Snail_action"][0]
+    sprite_dictionary["Orange_Mushroom_idle_sprites"] = sprite_dictionary["Orange_Mushroom_action"][0]
     sprite_dictionary["Character_idle_sprites"] = sprite_dictionary["Character_action"][0]
 
     # 공격 animation
     sprite_dictionary["Snail_attack_animation_sprites"] = sprite_dictionary["Snail_action"][0:5]
+    sprite_dictionary["Orange_Mushroom_attack_animation_sprites"] = sprite_dictionary["Orange_Mushroom_action"][2:5]
     sprite_dictionary["Character_attack_animation_sprites"] = sprite_dictionary["Character_action"][4:7]
 
     # move animation
     sprite_dictionary["Snail_move_animation_sprites"] = sprite_dictionary["Snail_action"][0:5]
+    sprite_dictionary["Orange_Mushroom_move_animation_sprites"] = sprite_dictionary["Orange_Mushroom_action"][2:5]
     sprite_dictionary["Character_move_animation_sprites"] = sprite_dictionary["Character_action"][0:4]
 
     # # shooting animation
@@ -29,6 +33,7 @@ def initialize():
 
     # 유닛 death 애니메이션
     sprite_dictionary["Snail_death"] = load_sprite_in_row("Snail_death", 9)
+    sprite_dictionary["Orange_Mushroom_death"] = load_sprite_in_row("Orange_Mushroom_death", 3)
     sprite_dictionary["Character_death"] = load_sprite_in_row("Snail_death", 9)
 
     # 커서 이미지
