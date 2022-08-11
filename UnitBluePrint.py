@@ -24,6 +24,9 @@ class UnitBluePrint:
         # 스프라이트와 포지션 간의 오프셋
         self.position_offset = kwargs['position_offset']
 
+        # 적인지 여부
+        self.monster = kwargs['monster']
+
         # animation
         self.idle_animation = kwargs['idle_animation']
         self.attack_animation = kwargs['attack_animation']

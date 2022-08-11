@@ -3,6 +3,7 @@ import math
 from Effect import *
 from HealthBar import *
 from GameObject import *
+import time
 
 
 class Unit(GameObject):
@@ -29,6 +30,13 @@ class Unit(GameObject):
         # 목표지점
         self.des_x = self.x
         self.des_y = self.y
+
+        # # 이동거리
+        # self.dx = self.des_x - self.x
+        # self.dy = self.des_y - self.y
+
+        # 몬스터 여부
+        self.monster = unit_blueprint.monster
 
         # 유닛 상태
         self.state = None
@@ -134,17 +142,53 @@ class Unit(GameObject):
         self.attack_target = None
         self.update_rot()
 
-    def automove(self):
+    def automove1(self):
         self.next_state = Unit.STATE_MOVE
         self.mission = Unit.STATE_MOVE
 
-        self.des_x = 1400
-        self.des_y = 100
-
-        print(self.mission)
+        self.des_x = 970
+        self.des_y = 30
 
         self.attack_target = None
         self.update_rot()
+        self.health_bars.disselected()
+        GameObject.set_disselect(self)
+
+    def automove2(self):
+        self.next_state = Unit.STATE_MOVE
+        self.mission = Unit.STATE_MOVE
+
+        self.des_x = 970
+        self.des_y = 770
+
+        self.attack_target = None
+        self.update_rot()
+        self.health_bars.disselected()
+        GameObject.set_disselect(self)
+
+    def automove3(self):
+        self.next_state = Unit.STATE_MOVE
+        self.mission = Unit.STATE_MOVE
+
+        self.des_x = 30
+        self.des_y = 770
+
+        self.attack_target = None
+        self.update_rot()
+        self.health_bars.disselected()
+        GameObject.set_disselect(self)
+
+    def automove4(self):
+        self.next_state = Unit.STATE_MOVE
+        self.mission = Unit.STATE_MOVE
+
+        self.des_x = 30
+        self.des_y = 30
+
+        self.attack_target = None
+        self.update_rot()
+        self.health_bars.disselected()
+        GameObject.set_disselect(self)
 
     def attack_command(self, target):
         self.mission = Unit.STATE_ATTK
@@ -184,6 +228,7 @@ class Unit(GameObject):
             return
 
     def update_rot(self):
+
         # 목표 지점까지 남은 거리 및 각도
         dx = self.des_x - self.x
         dy = self.des_y - self.y
@@ -191,7 +236,7 @@ class Unit(GameObject):
 
         # 유닛이 돌아간 정도
         self.rot_index = (int)((self.theta + math.pi / 10 + math.pi / self.unit_blueprint.sprite_row_number) / (
-                    math.pi / (self.unit_blueprint.sprite_row_number // 2)) \
+                math.pi / (self.unit_blueprint.sprite_row_number // 2)) \
                                + self.unit_blueprint.sprite_row_number)
         self.rot_index %= self.unit_blueprint.sprite_row_number
 

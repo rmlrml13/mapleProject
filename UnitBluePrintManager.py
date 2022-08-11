@@ -28,7 +28,8 @@ class UnitBluePrintManager:
 
             death_effect_offset=(0, 0),
             death_effect_remain_time=5,
-            is_effect_lower=True,
+            is_effect_lower=False,
+            monster=True,
 
             idle_animation=StaticIdleAnimation("Snail"),
             attack_animation=ForwardOnlyAttackAnimation("Snail"),
@@ -51,7 +52,8 @@ class UnitBluePrintManager:
 
             death_effect_offset=(0, 0),
             death_effect_remain_time=5,
-            is_effect_lower=True,
+            is_effect_lower=False,
+            monster=True,
 
             idle_animation=StaticIdleAnimation("Orange_Mushroom"),
             attack_animation=ForwardOnlyAttackAnimation("Orange_Mushroom"),
@@ -75,6 +77,7 @@ class UnitBluePrintManager:
             death_effect_offset=(0, 0),
             death_effect_remain_time=5,
             is_effect_lower=True,
+            monster=False,
 
             idle_animation=StaticIdleAnimation("Character"),
             attack_animation=ForwardOnlyAttackAnimation("Character"),

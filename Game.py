@@ -7,7 +7,6 @@ from EffectManager import *
 from Unit import *
 from Worker import *
 import ImageLoader
-import schedule
 
 
 class Game:
@@ -22,13 +21,14 @@ class Game:
         self.total_monster = 0
         self.play_count = 0
 
-        self.canvas = Canvas(self.tk, width=1500, height=800)
+        self.canvas = Canvas(self.tk, width=1000, height=800)
         self.canvas.pack()
 
         # 기준 이미지
         # 얘보다 밑으로 보낼껀지 위로 보낼껀지 결정
 
-        self.zero_image = self.canvas.create_image(0, 0, image='')
+        self.background = PhotoImage(file='./map_5.png')
+        self.zero_image = self.canvas.create_image(500, 400, image=self.background)
         self.command_center = None
 
         ImageLoader.initialize()
@@ -42,13 +42,12 @@ class Game:
 
     def createMonster(self, name):
         monster_blueprint = self.unit_blueprint_manager.get_unit_blueprint(name)
-        monster = Unit(180, 80, monster_blueprint, self)
+        monster = Unit(30, 30, monster_blueprint, self)
         self.unit_manager.add_game_object(monster)
-        return monster
 
     def createCharacter(self, name):
         character_blueprint = self.unit_blueprint_manager.get_unit_blueprint(name)
-        character = Unit(500, 300, character_blueprint, self)
+        character = Unit(500, 400, character_blueprint, self)
         self.unit_manager.add_game_object(character)
 
     def mainLoop(self):
@@ -71,9 +70,14 @@ class Game:
             if 5 < elapsed:
                 if self.monster_count < 5:
                     if self.play_count % 100 == 0:
-                        monster = self.createMonster('Orange_Mushroom')
-                        monster.automove()
+                        self.createMonster('Orange_Mushroom')
                         self.monster_count += 1
+
+            self.unit_manager.auto_game_object_select1()
+            self.unit_manager.auto_game_object_select2()
+            self.unit_manager.auto_game_object_select3()
+            self.unit_manager.auto_game_object_select4()
+            self.unit_manager.auto_attack()
 
             # 기대시간보다 적게 걸릴 경우
             # 기대시간만큼 걸리도록 남은 시간을 대기
