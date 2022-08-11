@@ -89,6 +89,7 @@ class UnitManager:
             if unit.monster:
                 self.monster_x = unit.x
                 self.monster_y = unit.y
+                closet_emeny_unit = unit
             else:
                 self.character_x = unit.x
                 self.character_y = unit.y
